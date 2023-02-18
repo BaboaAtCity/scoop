@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const lacedscraper = require('./lacedscraper.js');
+let port = process.env.PORT || 3000;
 
 app.get('/api/search', (req, res) => {
     const input = req.query.name;
@@ -28,6 +29,7 @@ app.get('/api/search', (req, res) => {
   
   
 
-app.listen(8080, () => {
-  console.log('API listening on port 8080');
-});
+  app.listen(port, () => {
+    console.log(`API listening on port ${port}`);
+  });
+  
