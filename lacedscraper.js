@@ -13,23 +13,10 @@ module.exports = {
           if (!error && response.statusCode == 200) {
             const $ = cheerio.load(html);
     
-            // Find the script element that contains the JSON-LD object
-            //console.log(searchurl);
-            //console.log(response.body);
             const rep = JSON.parse(response.body);
             const firstProduct = rep.products[0];
             const price = firstProduct.price;
 
-            // Extract the text content of the element
-    
-            //const jsonLdText = jsonLdElement.text();
-    
-            // Parse the text as JSON
-    
-            //const jsonLd = JSON.parse(jsonLdText);
-    
-            // Extract the price from the JSON object
-            //const price = jsonLd.offers.price - jsonLd.offers.price * 0.12 - jsonLd.offers.price * 0.03 - 6.99;
 
 
     
