@@ -2,10 +2,12 @@ const express = require('express');
 const app = express();
 const lacedscraper = require('./lacedscraper.js');
 let port = process.env.PORT || 3000;
+console.log('imported');
 
 app.get('/api/search', (req, res) => {
     const input = req.query.name;
     const size = req.query.size;
+    console.log("handling query");
     lacedscraper.getPayout(input ,size)  
     .then(price => {
       res.send({ price });

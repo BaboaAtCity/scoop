@@ -8,10 +8,11 @@ module.exports = {
         const base = `https://www.laced.com/search.json?search%5Bsizes%5D%5B%5D=${size}&search%5Bsorted_by%5D=relevance&search%5Bterm%5D=`;
         const searchurl = base + encodeURIComponent(input);
         request({
-          url: searchurl
+          url: searchurl,
+          timeout: 10000
         }, (error, response, html) => {
           if (!error && response.statusCode == 200) {
-            const $ = cheerio.load(html);
+            //const $ = cheerio.load(html);
     
             const rep = JSON.parse(response.body);
             const firstProduct = rep.products[0];
@@ -31,15 +32,14 @@ module.exports = {
         return new Promise((resolve, reject) => {
             const base = `https://www.laced.com/search.json?search%5Bsizes%5D%5B%5D=${size}&search%5Bsorted_by%5D=relevance&search%5Bterm%5D=`;
             const searchurl = base + encodeURIComponent(name);
-            
-
+          
             request({
-                url: searchurl
+                url: searchurl,
+                timeout: 10000 
               }, (error, response, html) => {
                 if (!error && response.statusCode == 200) {
-                  const $ = cheerio.load(html);
+                  //const $ = cheerio.load(html);
           
-                  // Find the script element that contains the JSON-LD object
                   
                   const rep = JSON.parse(response.body);
                   const data = rep.products[0];
