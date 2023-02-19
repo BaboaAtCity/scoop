@@ -1,7 +1,11 @@
 const express = require('express');
+console.log('require express');
 const app = express();
+console.log('app = express');
 const lacedscraper = require('./lacedscraper.js');
+console.log('laced scraper require');
 let port = process.env.PORT || 3000;
+console.log('ported');
 console.log('imported');
 
 app.get('/api/search', (req, res) => {
