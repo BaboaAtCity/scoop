@@ -32,6 +32,19 @@ app.get('/api/search', (req, res) => {
       res.send({ error });
     });
   });
+
+  app.get('/api/searchEbay', (req, res) => {
+    const input = req.query.name;
+    const size = req.query.size;
+    console.log("handling query");
+    lacedscraper.getEbay(input ,size)  
+    .then(price => {
+      res.send({ price });
+    })
+    .catch(error => {
+      res.send({ error });
+    });
+  });
   
   
 
