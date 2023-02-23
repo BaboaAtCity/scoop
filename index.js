@@ -11,7 +11,7 @@ console.log('imported');
 app.get('/api/search', (req, res) => {
     const input = req.query.name;
     const size = req.query.size;
-    console.log("handling query");
+    console.log("handling query for laced price, name: "+ req.query.name +", size:" + req.query.size + ", from: " + req.ip );
     lacedscraper.getPayout(input ,size)  
     .then(price => {
       res.send({ price });
@@ -24,6 +24,7 @@ app.get('/api/search', (req, res) => {
   app.get('/api/searchAll', (req, res) => {
     const input = req.query.name;
     const size = req.query.size;
+    console.log("handling query for laced first result, name: "+ req.query.name +", size:" + req.query.size + ", from: " + req.ip );
     lacedscraper.getAll(input ,size)  
     .then(data => {
       res.send({ data });
@@ -36,7 +37,20 @@ app.get('/api/search', (req, res) => {
   app.get('/api/searchEbay', (req, res) => {
     const input = req.query.name;
     const size = req.query.size;
-    console.log("handling query");
+    console.log("handling query for ebay mean price, name: "+ req.query.name +", size:" + req.query.size + ", from: " + req.ip );
+    lacedscraper.getEbay(input ,size)  
+    .then(price => {
+      res.send({ price });
+    })
+    .catch(error => {
+      res.send({ error });
+    });
+  });
+
+  app.get('/api/searchEbayMedian', (req, res) => {
+    const input = req.query.name;
+    const size = req.query.size;
+    console.log("handling query for ebay median price, name: "+ req.query.name +", size:" + req.query.size + ", from: " + req.ip );
     lacedscraper.getEbay(input ,size)  
     .then(price => {
       res.send({ price });

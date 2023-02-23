@@ -81,6 +81,36 @@ module.exports = {
           }
         });
       });
+    },
+    getEbayMedian: function(name, size) {
+      return new Promise((resolve, reject) => {
+        const q = name.replace(/\s+/g, '+');
+        const searchurl = `https://www.ebay.co.uk/sch/i.html?_from=R40&_nkw=${q}&_sacat=0&LH_TitleDesc=0&LH_PrefLoc=1&LH_ItemCondition=3&LH_Complete=1&LH_Sold=1&rt=nc&UK%2520Shoe%2520Size=${size}&_dcat=15709`;
+    
+        request({
+          url: searchurl,
+          timeout: 10000 
+        }, (error, response, html) => {
+          if (!error && response.statusCode == 200) {
+            const $ = cheerio.load(html);
+        
+            const elements = $(".s-item__price .POSITIVE");
+            const prices = [];
+            elements.each((i, el) => {
+              const price = parseInt($(el).text().replace("£", ""));
+              if (!isNaN(price)) {
+                prices.push(price);
+              }
+            });
+            prices.sort((a, b) => a - b);
+            const medianPrice = (prices[Math.floor(prices.length / 2)] + prices[Math.ceil(prices.length / 2) - 1]) / 2;
+        
+            resolve(medianPrice);
+          } else {
+            reject(error);
+          }
+        });        
+      });
     }
     
 };
