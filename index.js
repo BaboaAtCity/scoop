@@ -7,6 +7,10 @@ console.log('laced scraper require');
 let port = process.env.PORT || 3000;
 console.log('ported');
 console.log('imported');
+const cors = require('cors');
+
+
+app.use(cors());
 
 app.get('/api/search', (req, res) => {
     const input = req.query.name;
