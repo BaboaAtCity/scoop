@@ -12,6 +12,18 @@ const cors = require('cors');
 
 app.use(cors());
 
+app.get('/api/getPayoutAll', (req, res) => {
+  const input = req.query.input;
+  console.log("handling query for laced all, name: "+ req.query.input +",  from: " + req.ip );
+  lacedscraper.getPayoutAll(input)  
+  .then(data => {
+    res.send({ data });
+  })
+  .catch(error => {
+    res.send({ error });
+  });
+});
+
 app.get('/api/search', (req, res) => {
     const input = req.query.name;
     const size = req.query.size;
