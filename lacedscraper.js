@@ -29,6 +29,11 @@ module.exports = {
                 const prodData = JSON.parse(prod.attribs['data-react-props']);
                 const priceObj = prodData.sizeConversionIdsAndPrices;
                 const sizeObj = prodData.allSizeConversions;
+                const imageURL = prodData.imageUrl;
+                const name = prodData.title;
+                const sku = prodData.styleCode;
+                const year = prodData.details['Year Released'];
+                const link = productUrl;
 
                 const sizes = [];
                 const prices = [];
@@ -66,7 +71,7 @@ module.exports = {
                 console.log(sizePriceWithFee);
 
                 
-                resolve({productUrl , sizePrice, sizePriceWithFee});
+                resolve({productUrl , sizePrice, sizePriceWithFee, imageURL, name , sku, year , link});
               } else {
                 reject(error);
               }
