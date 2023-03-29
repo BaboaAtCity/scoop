@@ -27,13 +27,25 @@ module.exports = {
                 const $ = cheerio.load(html);
                 const prod = $('.product-hero__info > div:first-child')[0];
                 const prodData = JSON.parse(prod.attribs['data-react-props']);
-                const priceObj = prodData.sizeConversionIdsAndPrices;
+                let priceObj = prodData.sizeConversionIdsAndPrices;
                 const sizeObj = prodData.allSizeConversions;
                 const imageURL = prodData.imageUrl;
                 const name = prodData.title;
                 const sku = prodData.styleCode;
                 const year = prodData.details['Year Released'];
                 const link = productUrl;
+
+                console.log(priceObj);
+
+                priceObj = priceObj.map(item => {
+                  return {
+                    ...item,
+                    display_price_cents: item.display_price_cents / 100
+                  }
+                });
+
+                console.log(priceObj);
+
 
                 const sizes = [];
                 const prices = [];
@@ -44,7 +56,7 @@ module.exports = {
                   
                   if (matchingPrice) {
                     sizes.push(sizeObj[i].uk);
-                    prices.push(matchingPrice.price);
+                    prices.push(matchingPrice.display_price_cents);
                   }
                 }
 
