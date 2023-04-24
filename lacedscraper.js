@@ -114,10 +114,11 @@ module.exports = {
           timeout: 10000
         }, (error, response) => {
           if (!error && response.statusCode == 200) {
-    
             const rep = JSON.parse(response.body);
+            console.log(rep);
             const firstProduct = rep.products[0];
-            const price = firstProduct.price;
+            const cents = firstProduct.display_price_cents;
+            const price = cents /100 ;
 
 
 
